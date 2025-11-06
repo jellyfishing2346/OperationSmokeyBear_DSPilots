@@ -55,11 +55,18 @@ NERIS_FIELDS = [
 ]
 
 def _default_provider() -> LLMProvider:
-    kind = (os.getenv("LLM_PROVIDER") or "gemini").lower()
-    if kind == "gemini":
+    kind = (os.getenv("LLM_PROVIDER") or "ollama").lower()
+    
+    if kind == "ollama":
+        from .local_llm_provider import OllamaProvider
+        return OllamaProvider()
+    elif kind == "vllm":
+        from .local_llm_provider import VLLMProvider
+        return VLLMProvider()
+    elif kind == "gemini":
         return GeminiProvider()
     else:
-        raise ValueError(f"Unknown provider: {kind}")
+        raise ValueError(f"Unknown provider: {kind}. Use 'ollama', 'vllm', or 'gemini'")
 
 
 def categorize_transcript(
