@@ -71,3 +71,33 @@ Incident Schema CSV (e.g., core_mod_incident-*.csv): drives which fields you req
 Operation Smokey Bear transforms how first responders document incidents by converting voice recordings or text descriptions into structured, analytics-ready data. 
 Instead of choosing between thorough documentation and quick response times, responders can simply speak what happened and let AI extract the key details into standardized fields. 
 This proof-of-concept reduces reporting friction while ensuring consistent, searchable incident records that support better decision-making and resource allocation.
+
+## Workspace & local run notes
+
+If you cloned this repository into a developer workspace, a small set of convenience tools and examples are available under the `tools/` folder. To run locally:
+
+1. Create a Python virtual environment and install dependencies:
+
+```bash
+cd OperationSmokeyBear_DSPilots
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+2. Generate synthetic data and run the pipeline (examples):
+
+```bash
+python tools/generate_synthetic.py --count 1000 --out /Users/test/Downloads/synthetic_incidents.jsonl
+python tools/run_pipeline.py --input /Users/test/Downloads/synthetic_incidents.jsonl --output-dir /Users/test/Downloads/analysis_outputs_v2
+```
+
+3. Run the Streamlit app (from repo root):
+
+```bash
+streamlit run src/streamlit_app.py
+```
+
+4. Demo audit and scheduled exporter are in `tools/` and expect pipeline outputs and demo GeoJSON files under `/Users/test/Downloads` by default.
+
+If you'd like a `pyproject.toml`, CI workflow, or tests added, please enable the `restructure/workspace` branch where those artifacts are staged.

@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "operation-smokey-bear-dspilots"
+version = "0.1.0"
+description = "Proof-of-concept incident extraction & audit tooling"
+authors = [{name = "(repo)"}]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-q"
